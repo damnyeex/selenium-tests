@@ -5,7 +5,7 @@ class ProjectPage:
         self.driver = driver
 
     def click_projects_nav_link (self):
-        projects_link = self.driver.find_element(By.XPATH, '//*[@id="main_navbar"]/ul/li[4]/a')
+        projects_link = self.driver.find_element(By.XPATH, '''//*[@id='main_navbar']/ul[1]/li/a/span[text()='Projects']''')
         projects_link.click()
 
     def check_projects_url(self, url):

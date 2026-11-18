@@ -22,7 +22,7 @@ def test_login_localhost(driver, creds):
     login_page.submit_login_button('.login-button')
     login_page.wait_main_url()
     login_page.check_login_complete('http://localhost:5173/')
-    login_page.click_logout('//*[@id="app"]/div/header/nav/div/button[1]')
+    login_page.click_logout('''//div[@class='nav-action']/button/span[text()='Выйти']''')
     login_page.check_logout_complete("http://localhost:5173/login")
 
 users = ["admin123", "user1", "user12", "user123"]

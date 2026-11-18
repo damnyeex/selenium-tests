@@ -39,3 +39,11 @@ class LoginPage:
         error_message = self.driver.find_element(By.CSS_SELECTOR, ".error-message").text
         assert (message == error_message)
 
+    def login(self, login, password):
+        self.open_login_page()
+        self.fill_login_field("#login", login)
+        self.fill_password_field("#password", password)
+        self.submit_login_button(".login-button")
+        self.wait_main_url()
+        return self
+

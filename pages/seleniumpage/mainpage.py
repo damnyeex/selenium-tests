@@ -8,5 +8,5 @@ class MainPage:
         self.driver.get("https://www.selenium.dev/")
 
     def click_webdriver_tool(self):
-        webdriver_tool = self.driver.find_element(By.XPATH,'/html/body/div[2]/main/section[3]/div/div/div[1]/div/div[2]/div/a')
+        webdriver_tool = self.driver.find_element(By.XPATH,'''//a[@class='selenium-button selenium-webdriver text-uppercase fw-bold']''')
         self.driver.execute_script("arguments[0].click();", webdriver_tool)
