@@ -1,5 +1,5 @@
-from pages.localhost.userspage import UsersPage
-from pages.localhost.tenantspage import TenantsPage
+from pages.spring_app_pages.users_page import UsersPage
+from pages.spring_app_pages.tenants_page import TenantsPage
 import pytest
 
 @pytest.mark.parametrize('creds', ['admin'], indirect=True)
@@ -8,9 +8,9 @@ def test_localhost_tenants_page(logged_in_page, page_url, creds):
     logged_in_page.get(page_url)
 
     tenants_page = TenantsPage(logged_in_page)
-    tenants_page.check_tenant_page_title('h2', 'Отделы')
-    tenants_page.check_tenant_info('.tenant-name', 'Отдел бухгалтерии')
-    tenants_page.click_tenant_detail_btn('''//*[@class='base-button base-button--secondary details-button'][1]''')
+    tenants_page.check_tenant_page_title('Отделы')
+    tenants_page.check_tenant_info('Отдел бухгалтерии')
+    tenants_page.click_tenant_detail_btn()
     tenants_page.check_header_tag_text('h2', 'Отдел бухгалтерии')
     tenants_page.check_header_title_and_value('Отдел бухгалтерии', 'Всего сотрудников: 1')
 
@@ -19,7 +19,7 @@ def test_localhost_tenants_page(logged_in_page, page_url, creds):
 def test_localhost_users_page(logged_in_page, page_url, creds):
     logged_in_page.get(page_url)
     users_page = UsersPage(logged_in_page)
-    users_page.click_user_profile('''//ul[@class='users-list']/li[@class='user-card'][1]/div[@class='user-actions']/button''')
+    users_page.click_user_profile()
     users_page.check_user_profile_field("Логин:", "user2")
 
 

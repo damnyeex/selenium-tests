@@ -1,6 +1,6 @@
-from pages.localhost.loginpage import LoginPage
+from pages.spring_app_pages.login_page import LoginPage
+from config import BASE_URL
 import pytest
-
 
 @pytest.mark.parametrize(
     'creds',
@@ -17,13 +17,13 @@ def test_login_localhost(driver, creds):
     login_page = LoginPage(driver)
 
     login_page.open_login_page()
-    login_page.fill_login_field('#login' ,login)
-    login_page.fill_password_field('#password',password)
-    login_page.submit_login_button('.login-button')
+    login_page.fill_login_field(login)
+    login_page.fill_password_field(password)
+    login_page.submit_login_button()
     login_page.wait_main_url()
-    login_page.check_login_complete('http://localhost:5173/')
-    login_page.click_logout('''//div[@class='nav-action']/button/span[text()='Выйти']''')
-    login_page.check_logout_complete("http://localhost:5173/login")
+    login_page.check_login_complete(f'{BASE_URL}')
+    login_page.click_logout()
+    login_page.check_logout_complete(f'{BASE_URL}/login')
 
 users = ["admin123", "user1", "user12", "user123"]
 passwords = ["admin123", "user3", "user4", "user5"]
@@ -41,8 +41,8 @@ def test_login_localhost_failed(driver, failed_creds):
     login_page = LoginPage(driver)
 
     login_page.open_login_page()
-    login_page.fill_login_field('#login', login)
-    login_page.fill_password_field('#password', password)
-    login_page.submit_login_button('.login-button')
+    login_page.fill_login_field(login)
+    login_page.fill_password_field(password)
+    login_page.submit_login_button()
     login_page.catch_error_message('Invalid credentials')
 

@@ -1,8 +1,13 @@
 from selenium.webdriver.common.by import By
+from pages.base_page import BasePage
 
-class TenantsPage:
+title_selector = (By.CSS_SELECTOR, 'h2')
+tenant_info_selector = (By.CSS_SELECTOR, '.tenant-name')
+tenant_detail_btn_selector = (By.XPATH, '''//*[@class='base-button base-button--secondary details-button'][1]''')
+
+class TenantsPage(BasePage):
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__(driver)
 
     # Шаблон локатора шапки в деталях тенанта: в {} подставляется имя селектора
     Header_INFO_DIV = "//div[@class='tenant-info-header']//{}"
@@ -21,16 +26,16 @@ class TenantsPage:
             )
 
 
-    def check_tenant_page_title(self, selector, name):
-        title = self.driver.find_element(By.CSS_SELECTOR, selector).text
+    def check_tenant_page_title(self, name):
+        title = self.find(title_selector).text
         assert (name == title)
 
-    def check_tenant_info(self, selector, name):
-        tenant_name = self.driver.find_element(By.CSS_SELECTOR, selector).text
+    def check_tenant_info(self, name):
+        tenant_name = self.find(tenant_info_selector).text
         assert (name == tenant_name)
 
-    def click_tenant_detail_btn(self, path):
-        detail_btn = self.driver.find_element(By.XPATH, path)
+    def click_tenant_detail_btn(self):
+        detail_btn = self.find(tenant_detail_btn_selector)
         detail_btn.click()
 
     def check_header_tag_text(self, tag: str, expected_value: str):

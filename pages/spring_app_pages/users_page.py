@@ -1,8 +1,11 @@
 from selenium.webdriver.common.by import By
+from pages.base_page import BasePage
 
-class UsersPage:
+profile_btn_selector = (By.XPATH, '''//ul[@class='users-list']/li[@class='user-card'][1]/div[@class='user-actions']/button''')
+
+class UsersPage(BasePage):
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__(driver)
 
     # Шаблон локатора: в {} подставляется имя поля
     FIELD_DIV = "//div[@class='profile-field'][label[normalize-space()='{}']]"
@@ -16,8 +19,8 @@ class UsersPage:
         value = field_div.find_element(By.TAG_NAME, "span").text
         return label, value
 
-    def click_user_profile(self, path):
-        user_profile_btn = self.driver.find_element(By.XPATH, path)
+    def click_user_profile(self):
+        user_profile_btn = self.find(profile_btn_selector)
         user_profile_btn.click()
 
     def check_user_profile_field(self, field_name:str, expected_value: str,):

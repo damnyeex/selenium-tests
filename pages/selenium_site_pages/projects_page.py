@@ -1,11 +1,15 @@
 from selenium.webdriver.common.by import By
+from pages.base_page import BasePage
 
-class ProjectPage:
+projects_link_selector = (By.XPATH, '''//*[@id='main_navbar']/ul[1]/li/a/span[text()='Projects']''')
+projects_selector = (By.CSS_SELECTOR, '.alert')
+
+class ProjectPage(BasePage):
     def __init__(self,driver):
-        self.driver = driver
+        super().__init__(driver)
 
     def click_projects_nav_link (self):
-        projects_link = self.driver.find_element(By.XPATH, '''//*[@id='main_navbar']/ul[1]/li/a/span[text()='Projects']''')
+        projects_link = self.find(projects_link_selector)
         projects_link.click()
 
     def check_projects_url(self, url):
@@ -14,5 +18,5 @@ class ProjectPage:
             f"Ожидался URL ${url}, получен {projects_url}"
 
     def check_count_projects(self, count):
-        projects = self.driver.find_elements(By.CSS_SELECTOR, '.alert')
+        projects = self.find(projects_selector)
         assert len(projects) == count

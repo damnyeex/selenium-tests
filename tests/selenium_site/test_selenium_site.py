@@ -1,6 +1,6 @@
-from pages.seleniumpage.mainpage import MainPage
-from pages.seleniumpage.webdriverpage import WebdriverPage
-from pages.seleniumpage.projectspage import ProjectPage
+from pages.selenium_site_pages.main_page import MainPage
+from pages.selenium_site_pages.webdriver_page import WebdriverPage
+from pages.selenium_site_pages.projects_page import ProjectPage
 
 def test_open_selenium_webdriver(driver):
     main_page = MainPage(driver)
